@@ -1,0 +1,43 @@
+{
+  "name": "Calendar Statistics",
+  "description": "Calculates number of calendar entries and their total duration",
+  "version": "0.2",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs", 
+    "identity",
+    "http://*/*",
+    "https://www.googleapis.com/calendar"
+  ],
+  
+  "page_action": {
+    "default_icon": "img/icons/icon.png",
+    "default_title": "Calendar Statistics",
+    "default_popup": "popup.html"
+  },
+  
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  },
+  
+   "content_scripts" : [
+     {
+       "matches" : [
+         "https://www.google.com/calendar/*"
+       ],
+       "js" : ["js/contentscript.js"],
+       "run_at" : "document_idle",
+       "all_frames" : false
+     }
+   ],
+   
+  "content_security_policy": "script-src 'self' chrome-extension-resource: https://apis.google.com; object-src 'self'",
+  
+  "oauth2": {
+    "client_id": "820275896749-dmaqmts7k2japt0p7r8bqec14rblloep.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.readonly"
+    ]
+  }
+}
